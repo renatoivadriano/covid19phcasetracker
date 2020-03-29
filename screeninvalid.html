@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./img/icon.png" type="image/png" />
+    <title>| COVID19PH CASE TRACKER</title>
+    <style type="text/css">
+    @font-face {
+      font-family: "Barlow";
+      src: local("Barlow SemiBold"), local("Barlow-SemiBold"), url("https://fonts.gstatic.com/s/barlow/v4/7cHqv4kjgoGqM7E30-8s51ostz0rdg.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 600;
+      unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    body {
+      font-family: Barlow;
+    }
+    </style>
+	</head>
+	<body style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);text-align: center;background-color: #8e44ad !important;">
+		<p>CANT SUPPORT THIS SCREEN SIZE</p>
+		<p>CHANGE YOUR RESOLUTION HIGHER THAN 400 X 315</p>
+		<p>Sorry for the inconvinience.</p>
+	</body>
+</html>
+<script type="text/javascript">
+	setInterval(function () {
+		if(screen.height >= 400 && screen.width >= 315) {
+			if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))){
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/mobile.html";
+			}else{
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/mobile.html";
+			}
+		}
+	}, 1000);
+</script>

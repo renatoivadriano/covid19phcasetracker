@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="./img/icon.png" type="image/png" />
+		<title>| COVID19PH CASE TRACKER</title>
+		<link rel="stylesheet" href="./covid19ph-css-1/covid-19-raiv-custom.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</head>
+	<body id="all" class="no-scroll">
+		<header class="head">
+			<p id="tl1" class="text-center margin-tb-4_75-i" style="position:absolute;bottom: 0px;left: 50px">COVID-19 PH Case Tracker</p>
+		</header>
+		<nav class="sidebar"></nav>
+		<div class="sidenav sidenav_cont">
+			<a href="https://renatoivadriano.github.io/covid19phcasetracker/casenumber/mob/index.html" target="iframe_map" class="casenumber font-size-25"><p class="text-center">Case Numbers&nbsp;</p><i class="fas fa-th text-right"></i></a>
+			<a href="https://renatoivadriano.github.io/covid19phcasetracker/5" target="iframe_map" class="stats font-size-25"><p class="text-center">Statistics&nbsp;</p><i class=" far fa-chart-bar text-right"></i></a>
+			<a href="https://renatoivadriano.github.io/covid19phcasetracker/2/mob" target="iframe_map" class="casesph font-size-25"><p class="text-center">Cases Within Philippines&nbsp;</p><i class="fas fa-users text-right"></i></a>
+			<a href="https://renatoivadriano.github.io/covid19phcasetracker/3/mob" target="iframe_map" class="casesof font-size-25"><p class="text-center">Overseas Filipino Cases&nbsp;</p><i class="fas fa-plane-departure text-right"></i></a>
+			<a href="https://renatoivadriano.github.io/covid19phcasetracker/1/mob" target="iframe_map" class="casesfn font-size-25"><p class="text-center">Foreign National Cases&nbsp;</p><i class="fas fa-globe text-right"></i></a>
+			<a href="https://renatoivadriano.github.io/covid19phcasetracker/about.html" target="iframe_map" class="about font-size-25"><p class="text-center">About&nbsp;</p><i class="fas fa-info-circle text-right"></i></a>
+			<a href="https://www.linkedin.com/in/renatoivadriano" target="_blank" id="dev" class="dev font-size-25"><i class="fas fa-code text-right"></i></a>
+		</div>
+		<iframe id="iframe_map" name="iframe_map" src=""></iframe>
+	</body>
+</html>
+<script type="text/javascript">
+	document.getElementById('iframe_map').src = "https://renatoivadriano.github.io/covid19phcasetracker/casenumber/mob/index.hmtl";
+	setInterval(function () {
+		if(screen.width <= 490){
+			document.getElementById('tl1').style.fontSize = '22px';
+		}
+		if(screen.width <= 352){
+			document.getElementById('tl1').style.fontSize = '17px';
+		}
+		if(screen.width >= 491){
+			document.getElementById('tl1').style.fontSize = '27px';
+		}
+		if(screen.width >= 701 && screen.height >= 640) {
+			if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))){
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/index.html";
+			}else{
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/index.html";
+			}
+		}
+	    if(parent.screen.height <= 400 && parent.screen.width <= 315){
+			if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))){
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/screeninvalid.html";
+			}else{
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/screeninvalid.html";
+			}
+	    }
+	    if(parent.screen.height <= 400 && parent.screen.width >= 315){
+	    	if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))){
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/screeninvalid.html";
+			}else{
+				document.location = "https://renatoivadriano.github.io/covid19phcasetracker/screeninvalid.html";
+			}
+	    }
+	}, 1000);
+</script>
