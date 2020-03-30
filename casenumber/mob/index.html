@@ -66,6 +66,11 @@
   request.open('GET', rUrl);
   request.responseType = 'json';
   request.send();
+
+  request.onload = function() {
+    const rqstcont = request.response;
+    addtoPtag(rqstcont);
+  }
   function addtoPtag(jsonObj){
     const feat = jsonObj['features'];
     document.getElementById('tcase').innerHTML  = feat[0].attributes.confirmed;
