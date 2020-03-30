@@ -1,0 +1,36 @@
+name: update-doh-case-number
+
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron:  '15 * * * *'
+  
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install requests
+    - name: Update json
+      run: python -c "import requests; url='${{secrets.DOH_API_CASE_NUMBER}}'; r=requests.get(url); open('./json/doh_api_case_number.json', 'w').write(r.text);"
+    - name: Commit files
+      run: |
+        git config --local user.email "renatoivadriano@users.noreply.github.com"
+        git config --local user.name "Renato Adriano IV"
+        git commit -m "Updated Json File" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
