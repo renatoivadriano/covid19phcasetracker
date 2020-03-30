@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://renatoivadriano.github.io/covid19phcasetracker/img/icon.png" type="image/png" />
+    <title>| COVID19PH CASE TRACKER</title>
+    <link rel="stylesheet" href="https://renatoivadriano.github.io/covid19phcasetracker/covid19ph-css-1/covid-19-raiv-custom.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script type="text/javascript">
+      var idee = '';
+      var fidd = '';
+    </script>
+  </head>
+  <body id="all" style="overflow: hidden;">
+    <div class="no-scroll padding-all-0-i-div margin-all-0-i-p margin-all-0-i-div">
+      <div class="row height-100p-i-60">
+        <div class="col-12 bg-color-95a5a6">
+            <p id="fontchange1" class="text-center center font-size-25-i">Total Cases: <br/><span id="tcase"></span></p>
+        </div>
+        <div class="col-12 bg-color-3498db">
+            <p id="fontchange2" class="text-center center font-size-25-i">Active Cases: <br/><span id="acase"></span></p>
+        </div>
+        <div class="col-12 bg-color-d35400">
+            <p id="fontchange3" class="text-center center font-size-25-i">PUI: <br/><span id="puis"></span></p>
+        </div>
+        <div class="col-12 bg-color-2ecc71">
+            <p id="fontchange4" class="text-center center font-size-25-i">Recovered: <br/><span id="reco"></span></p>
+        </div>
+        <div class="col-12 bg-color-c0392b">
+            <p id="fontchange5" class="text-center center font-size-25-i">Death: <br/><span id="deth"></span></p>
+        </div>
+        <div class="col-12 bg-color-8e44ad">
+            <p id="fontchange6" class="text-center center font-size-25-i">PUM: <br/><span id="pums"></span></p>
+        </div>
+        <div class="col-12 bg-color-16a085">
+            <p id="fontchange7" class="text-center center font-size-25-i">Test Conducted: <br/><span id="tcon"></span></p>
+        </div>
+      </div>
+      <div class="height-60-i" style="overflow: auto;">
+        <div id="footer1" class="row" style="font-size: 12px;">
+          <div class="col">
+            <p>Disclaimer: Information listed in this web site may change at any time due to evolving situation. For further info, please visit the official <a class="no-underline" target="_blank" href="https://www.doh.gov.ph/">DOH web site</a>.</p>
+          </div>
+          <div class="col">
+            <p>PUI - Person Under Investigation</p>
+            <p>PUM - Person Under Monitoring</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p>DATA SOURCE: Replicated from the &nbsp;<a class="no-underline" target="_blank" href="https://ncovtracker.doh.gov.ph/">DOH CASE TRACKER</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+  </body>
+</html>
+<script>
+  let rUrl = 'https://raw.githubusercontent.com/renatoivadriano/covid19phcasetracker/master/json/doh_api_case_number.json';
+  let request = new XMLHttpRequest();
+  request.open('GET', rUrl);
+  request.responseType = 'json';
+  request.send();
+  function addtoPtag(jsonObj){
+    const feat = jsonObj['features'];
+    document.getElementById('tcase').innerHTML  = feat[0].attributes.confirmed;
+    document.getElementById('puis').innerHTML  = feat[0].attributes.PUIs;
+    document.getElementById('pums').innerHTML  = feat[0].attributes.PUMs;
+    document.getElementById('reco').innerHTML  = feat[0].attributes.recovered;
+    document.getElementById('deth').innerHTML  = feat[0].attributes.deaths;
+    document.getElementById('tcon').innerHTML  = feat[0].attributes.tests;
+    var activecase = Number(feat[0].attributes.confirmed) - (Number(feat[0].attributes.recovered)+Number(feat[0].attributes.deaths))
+    document.getElementById('acase').innerHTML  = activecase;
+  }
+  function p18(){
+      document.getElementById('fontchange1').style.fontSize = '18px';
+      document.getElementById('fontchange2').style.fontSize = '18px';
+      document.getElementById('fontchange3').style.fontSize = '18px';
+      document.getElementById('fontchange4').style.fontSize = '18px';
+      document.getElementById('fontchange5').style.fontSize = '18px';
+      document.getElementById('fontchange6').style.fontSize = '18px';
+      document.getElementById('fontchange7').style.fontSize = '18px';
+  };
+  setInterval(function () {
+    if(parent.screen.height <= 420 && parent.screen.width >= 421){
+      p18();
+    }else if(parent.screen.height <= 720 && parent.screen.width <= 421){
+      p18();
+    }else{
+      document.getElementById('fontchange1').style.fontSize = '25px';
+      document.getElementById('fontchange2').style.fontSize = '25px';
+      document.getElementById('fontchange3').style.fontSize = '25px';
+      document.getElementById('fontchange4').style.fontSize = '25px';
+      document.getElementById('fontchange5').style.fontSize = '25px';
+      document.getElementById('fontchange6').style.fontSize = '25px';
+      document.getElementById('fontchange7').style.fontSize = '25px';
+    }
+  }, 1000);
+</script>

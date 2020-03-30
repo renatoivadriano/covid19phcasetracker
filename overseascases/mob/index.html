@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <link rel="icon" href="https://renatoivadriano.github.io/covid19phcasetracker/img/icon.png" type="image/png" />
+    <title>| COVID19PH CASE TRACKER</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://renatoivadriano.github.io/covid19phcasetracker/covid19ph-css-1/covid-19-raiv-custom.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <style>
+      html{ height: 100%; }
+      body{ height: 100%; margin:0; padding: 0; }
+      #map{ height: 100%;}
+      #screenload {
+        position: absolute;
+        z-index: 9999999;
+        display: show;
+        background-color: white;
+        width:100%;
+        height:1000%;
+      }
+      .screenloadimage {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        max-width: 100%;
+        -moz-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+      }
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    <script type="text/javascript">
+      var idee = '';
+      var fidd = '';
+    </script>
+  <div id="screenload">
+    <i class="screenloadimage"></i>
+  </div>
+  </head> 
+  <body id="all" style="overflow: hidden;">
+    <div id="map" style='height:100%;width:100%;'></div>>
+    <div style="position:fixed;bottom: 0px;background-color: #e67e22;z-index: 999;width: 100%;text-align: center;">Overseas Filipino Cases</div>
+  </body>
+</html>
+<script>
+  $(window).on("load", function(){setTimeout(function() {screenloadhide()}, 5000);});
+  function screenloadhide(){
+    $('#screenload').fadeOut(3000);
+  }
+  var slideIndex = 1;
+  function plusDivs(n, loc) {
+    showDivs(slideIndex += n, loc);
+  }
+  function showDivs(n, loc) {
+    idee = loc;
+    var i;
+    var x = document.getElementById(loc).getElementsByClassName("slides");
+    if (n > x.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = x.length} ;
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    x[slideIndex-1].style.display = "block";
+  }
+  var circleTracerRed = L.icon({
+    iconUrl: 'https://renatoivadriano.github.io/covid19phcasetracker/img/dotr.png',
+    iconSize: [12, 12],
+    iconAnchor: [6,12],
+    popupAnchor: [0, -12]
+  });
+  var myMap = L.map('map', {
+      center: [0, 115],
+      zoom: 3,
+      scrollWheelZoom: true,
+      doubleClickZoom: true,
+      zoomControl: true,
+      dragging: true
+    });
+  L.tileLayer('http://{s}.tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=HN9vnGVNz3tmIU0DYyJBeGVBXZpzv3fGn0u4tmTh7DyLyDBhbTtLJHYNDS2bLC2h', {}).addTo(myMap);
+
+  let rUrl = 'https://raw.githubusercontent.com/renatoivadriano/covid19phcasetracker/master/json/doh_api_of_masterlist.json';
+  let request = new XMLHttpRequest();
+    request.open('GET', rUrl);
+    request.responseType = 'json';
+    request.send();
+
+  request.onload = function() {
+    const r = request.response;
+    distinctValues(r);
+  }
+  const unique = (value, index, self) => {return self.indexOf(value) === index};
+  var where_now = [];
+  var map_marker = [];
+  function distinctValues(jsonObj){
+    var feat = jsonObj['features'];
+    var where_now_conter = "";
+    var lat, long, idnum = 0;
+    for(var i = 0; i < feat.length; i++) {
+      where_now[i] = feat[i].attributes.country;
+    }
+    where_now = where_now.filter(unique);
+    for(var i = 0; i < where_now.length; i++) {
+      var where = "";
+      where_now_conter = "";
+      where_now_conter = "<div id='idnum"+i+"' class='all' style='display: block;width:300px;'>";
+      for(var j = 0; j < feat.length; j++) {
+        if (where_now[i] == feat[j].attributes.country) {
+          where_now_conter += "<div class='slides' style='display: none'><div class='row margin-all-0-i text-center'>  <div class='col-12 border-all-s1 padding-lf-5'><span style='float:left;cursor: pointer;width: 20px;z-index:999;' onclick='plusDivs(-1,idee);'>❮❮</span><i class='fas fa-globe'></i>&nbsp;"+feat[j].attributes.Case_numbe+"&nbsp;DETAILS<span style='float:right;cursor: pointer;width: 20px;z-index:999;' onclick='plusDivs(1,idee)'>❯❯</span></div></div><div class='row margin-all-0-i'>  <div class='col-5 border-all-s1 padding-lf-5'>Age</div>  <div class='col-7 border-all-s1 padding-lf-5'>"+feat[j].attributes.age+"</div></div><div class='row margin-all-0-i'>  <div class='col-5 border-all-s1 padding-lf-5'>Sex</div>  <div class='col-7 border-all-s1 padding-lf-5'>"+feat[j].attributes.sex+"</div></div><div class='row margin-all-0-i'>  <div class='col-5 border-all-s1 padding-lf-5'>Country</div>  <div class='col-7 border-all-s1 padding-lf-5'>"+feat[j].attributes.country+"</div></div><div class='row margin-all-0-i'>  <div class='col-5 border-all-s1 padding-lf-5'>Date Confirmed</div>  <div class='col-7 border-all-s1 padding-lf-5'>"+feat[j].attributes.date_confi+"</div></div><div class='row margin-all-0-i'>  <div class='col-5 border-all-s1 padding-lf-5'>Status of condition</div>  <div class='col-7 border-all-s1 padding-lf-5'>"+feat[j].attributes.status+"</div></div><div class='row margin-all-0-i'>  <div class='col-5 border-all-s1 padding-lf-5'>Remarks</div>  <div class='col-7 border-all-s1 padding-lf-5'>"+feat[j].attributes.remarks+"</div></div>  </div>";
+            lat = feat[j].attributes.latitude;
+            long = feat[j].attributes.longitude;
+        }
+      }
+      where_now_conter = where_now_conter+"</div>";
+      where = "idnum"+i;
+      marker(i, lat, long, where, where_now_conter);
+    }
+  }
+  function marker(i, lat, long, where, where_now_conter){
+    map_marker[i] = L.marker([lat, long], {icon: circleTracerRed}).addTo(myMap).bindPopup(where_now_conter).on('click', function() {idee=where;showDivs(1, idee);});
+  }
+</script>
