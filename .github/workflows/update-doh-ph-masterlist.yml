@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt
         pip install requests
     - name: Update json
-      run: python -c "import requests; url='${{secrets.DOH_API_PH_MASTERLIST}}'; r=requests.get(url); open('./json/doh_api_ph_masterlist.json', 'w').write(r.text.encode('utf-8'));"
+      run: python -c "import requests; url='${{secrets.DOH_API_PH_MASTERLIST}}'; r=requests.get(url); open('./json/doh_api_ph_masterlist.json', 'w', encoding='utf-8').write(r.text);"
     - name: Commit files
       run: |
         git config --local user.email "renatoivadriano@users.noreply.github.com"
