@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt
         pip install requests
     - name: Update json
-      run: python -c "import requests; url='${{secrets.DOH_API_CASE_NUMBER}}'; r=requests.get(url); open('./json/doh_api_case_number.json', 'w').write(r.text);"
+      run: python -c "import requests; url='${{secrets.DOH_API_CASE_NUMBER}}'; r=requests.get(url); open('./json/doh_api_case_number.json', 'w', encoding='utf-8').write(r.text);"
     - name: Commit files
       run: |
         git config --local user.email "renatoivadriano@users.noreply.github.com"
