@@ -1,1 +1,90 @@
-{"objectIdFieldName":"ObjectId","uniqueIdField":{"name":"ObjectId","isSystemMaintained":true},"globalIdFieldName":"","fields":[{"name":"day","type":"esriFieldTypeDate","alias":"day","sqlType":"sqlTypeTimestamp2","length":8,"domain":null,"defaultValue":null},{"name":"confirmed","type":"esriFieldTypeInteger","alias":"confirmed","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null},{"name":"PUIs","type":"esriFieldTypeInteger","alias":"PUIs","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null},{"name":"PUMs","type":"esriFieldTypeInteger","alias":"PUMs","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null},{"name":"recovered","type":"esriFieldTypeInteger","alias":"recovered","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null},{"name":"deaths","type":"esriFieldTypeInteger","alias":"deaths","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null},{"name":"tests","type":"esriFieldTypeInteger","alias":"tests","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null},{"name":"ObjectId","type":"esriFieldTypeOID","alias":"ObjectId","sqlType":"sqlTypeInteger","domain":null,"defaultValue":null}],"features":[{"attributes":{"day":1584144000000,"confirmed":3094,"PUIs":1323,"PUMs":null,"recovered":57,"deaths":144,"tests":5530,"ObjectId":1}}]}
+{
+  "objectIdFieldName" : "ObjectId", 
+  "uniqueIdField" : 
+  {
+    "name" : "ObjectId", 
+    "isSystemMaintained" : true
+  }, 
+  "globalIdFieldName" : "", 
+  "fields" : [
+    {
+      "name" : "day", 
+      "type" : "esriFieldTypeDate", 
+      "alias" : "day", 
+      "sqlType" : "sqlTypeTimestamp2", 
+      "length" : 8, 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "confirmed", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "confirmed", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "PUIs", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "PUIs", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "PUMs", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "PUMs", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "recovered", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "recovered", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "deaths", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "deaths", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "tests", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "tests", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "ObjectId", 
+      "type" : "esriFieldTypeOID", 
+      "alias" : "ObjectId", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }
+  ], 
+  "features" : [
+    {
+      "attributes" : {
+        "day" : 1584144000000, 
+        "confirmed" : 3246, 
+        "PUIs" : 1441, 
+        "PUMs" : null, 
+        "recovered" : 64, 
+        "deaths" : 152, 
+        "tests" : 5974, 
+        "ObjectId" : 1
+      }
+    }
+  ]
+}
